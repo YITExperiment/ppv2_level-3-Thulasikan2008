@@ -17,7 +17,7 @@ leaf.shape('leaf')
 leaf.color('green')
 leaf.penup()
 leaf.hideturtle()
-leaf.speed(0)
+leaf.speed()
 
 game_started = False
 text_turtle = t.Turtle()
@@ -43,21 +43,21 @@ def game_over():
     t.penup()
     t.hideturtle()
     t.write('GAME OVER!', align = 'center',
-font = ('Arial', 30, 'normal'))
+font = ('Aerial',30,'normal'))
 
 def display_score(current_score):
     score_turtle.clear()
     score_turtle.penup()
-    x = (t.window_width() / 2) - 50
-    y = (t.window_height() / 2) - 50
+    x = (t.window_width() / 2)-50
+    y = (t.window_height() / 2)-50
     score_turtle.setpos(x, y)
-    score_turtle.write(str(current_score), align='right', font=('Arial', 40, 'bold'))
+    score_turtle.write(str(current_score) , align = 'right', font=('Arial',40,'bold'))
 
 def place_leaf():
     leaf.hideturtle()
     leaf.setx(rd.randint(-200, 200))
     leaf.sety(rd.randint(-200, 200))
-    leaf.st()
+    leaf.showturtle()
 
 def start_game():
     global game_started
@@ -70,7 +70,7 @@ def start_game():
 
     caterpillar_speed = 2
     caterpillar_length = 3
-    caterpillar.shapesize(1, caterpillar_length, 1)
+    caterpillar.shapesize(1,caterpillar_length,1)
     caterpillar.showturtle()
     display_score(score)
     place_leaf()
@@ -80,8 +80,9 @@ def start_game():
         if caterpillar.distance(leaf) < 20:
             place_leaf()
             caterpillar_length = caterpillar_length + 1
-            caterpillar.shapesize(1, caterpillar_length, 1)
+            caterpillar.shapesize(1, caterpillar_length,1)
             caterpillar_speed = caterpillar_speed + 1
+            score = score + 10
             display_score(score)
         if outside_window():
             game_over()
@@ -89,19 +90,19 @@ def start_game():
         
 
 def move_up():
-    if caterpillar.heading() == 0 or caterpillar.heading == 180:
+    if caterpillar.heading() == 0 or caterpillar.heading() == 180:
       caterpillar.setheading(90)
 
 def move_down():
-    if caterpillar.heading() == 0 or caterpillar.heading == 180:
+    if caterpillar.heading() == 0 or caterpillar.heading() == 180:
        caterpillar.setheading(270)
 
 def move_left():
-    if caterpillar.heading() == 90 or caterpillar.heading == 270:
+    if caterpillar.heading() == 90 or caterpillar.heading() == 270:
         caterpillar.setheading(180)
 
 def move_right():
-    if caterpillar.heading() == 90 or caterpillar.heading == 270:
+    if caterpillar.heading() == 90 or caterpillar.heading() == 270:
       caterpillar.setheading(0)
 
 t.onkey(start_game,'space')
